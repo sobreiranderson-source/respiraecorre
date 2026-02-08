@@ -78,12 +78,12 @@ export const OrganizersCarousel: React.FC = () => {
           {organizers.map((org) => (
             <div
               key={org.id}
-              className="min-w-[280px] md:min-w-[320px] bg-white rounded-xl shadow-lg overflow-hidden snap-center flex-shrink-0 border-b-4 border-brand-purple flex flex-col"
+              className="min-w-[320px] md:min-w-[380px] bg-white rounded-xl shadow-lg overflow-hidden snap-center flex-shrink-0 border-b-4 border-brand-purple flex flex-col"
             >
               {/* Image / Placeholder Area */}
-              <div className="h-64 bg-gray-200 overflow-hidden relative flex items-center justify-center">
+              <div className="h-48 bg-gray-200 overflow-hidden relative">
                 {org.image ? (
-                  <img src={org.image} alt={org.name} className="w-full h-full object-contain hover:scale-105 transition-transform duration-500" />
+                  <img src={org.image} alt={org.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
                 ) : (
                   <div className="flex flex-col items-center justify-center text-gray-400">
                     <div className="bg-white p-4 rounded-full mb-2">
