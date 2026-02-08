@@ -1,12 +1,12 @@
-import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight, User } from 'lucide-react';
+import React from 'react';
+import { User } from 'lucide-react';
 
 interface Organizer {
   id: number;
   name: string;
   role: string;
   description: string;
-  image?: string; // Optional, defaults to placeholder if missing
+  image?: string;
 }
 
 const organizers: Organizer[] = [
@@ -41,47 +41,22 @@ const organizers: Organizer[] = [
 ];
 
 export const OrganizersCarousel: React.FC = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const scrollAmount = 320; // card width + margin
-      scrollRef.current.scrollBy({
-        left: direction === 'right' ? scrollAmount : -scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <section id="organizers" className="py-20 bg-brand-gray">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-end mb-10">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-black italic text-brand-dark uppercase">Conheça os Organizadores</h2>
-            <p className="text-gray-600 mt-2">Uma equipe médica unida pelo propósito da saúde.</p>
-          </div>
-          <div className="hidden md:flex gap-2">
-            <button onClick={() => scroll('left')} className="p-3 bg-white rounded-full shadow hover:bg-brand-neon hover:text-brand-dark transition-colors">
-              <ChevronLeft />
-            </button>
-            <button onClick={() => scroll('right')} className="p-3 bg-brand-dark text-white rounded-full shadow hover:bg-brand-purple transition-colors">
-              <ChevronRight />
-            </button>
-          </div>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-5xl font-black italic text-brand-dark uppercase">Conheça os Organizadores</h2>
+          <p className="text-gray-600 mt-2">Uma equipe médica unida pelo propósito da saúde.</p>
         </div>
 
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto gap-6 pb-8 no-scrollbar snap-x snap-mandatory"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {organizers.map((org) => (
             <div
               key={org.id}
-              className="min-w-[320px] md:min-w-[380px] bg-white rounded-xl shadow-lg overflow-hidden snap-center flex-shrink-0 border-b-4 border-brand-purple flex flex-col"
+              className="bg-white rounded-xl shadow-lg overflow-hidden border-b-4 border-brand-purple flex flex-col"
             >
               {/* Image / Placeholder Area */}
-              <div className="h-96 bg-white overflow-hidden relative flex items-center justify-center">
+              <div className="h-64 bg-white overflow-hidden relative flex items-center justify-center">
                 {org.image ? (
                   <img src={org.image} alt={org.name} className="w-full h-full object-contain" />
                 ) : (
@@ -107,11 +82,6 @@ export const OrganizersCarousel: React.FC = () => {
             </div>
           ))}
         </div>
-
-        {/* Mobile Swipe Hint */}
-        <p className="md:hidden text-center text-gray-400 text-xs mt-4 uppercase tracking-widest">
-          Arraste para ver mais
-        </p>
       </div>
     </section>
   );
